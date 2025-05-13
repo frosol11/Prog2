@@ -60,9 +60,6 @@ def hypersphere_exact(d): #Ex2, real value
 
 #Ex3: parallel code - parallelize for loop
 def sphere_volume_parallel1(n,d,np=10):
-
-    
-
     with future.ProcessPoolExecutor() as executor:
        results = executor.map(sphere_volume, [n]*np, [d]*np)
 
@@ -70,11 +67,12 @@ def sphere_volume_parallel1(n,d,np=10):
 
 #Ex4: parallel code - parallelize actual computations by splitting data
 def sphere_volume_parallel2(n,d,np=10):
-    pass
-    #n is the number of points
-    # d is the number of dimensions of the sphere
-    #np is the number of processes
-    #return 
+
+    n_per_process = n // np
+    with future.ProcessPoolExecutor() as executor:
+        futures = [executor.submit(sphere_volume, n_per_process, d) for _ in range(np)]
+        results = [f.result() for f in futures] 
+    return mean(results)
     
 def main():
     #Ex1
