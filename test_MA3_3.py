@@ -8,7 +8,7 @@ class Test(unittest.TestCase):
     def test_sphere_volume_parallel1(self):
         n = 100000
         d = 11
-        np = 2
+        np = 20
         start = pc()
         for y in range (np):
             sphere_volume(n,d)

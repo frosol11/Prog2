@@ -117,6 +117,8 @@ def main():
     stop = pc()
     print(f"Ex4: Parallel time of {d} and {n}: {stop-start}")
 
+
+
     
     
 
